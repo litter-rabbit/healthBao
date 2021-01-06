@@ -23,7 +23,7 @@ def get_student_status(id_card):
     nonce_str = str(uuid.uuid4()).replace('-','')
     timestamp = datetime.datetime.now().timestamp()
     timestamp = str(int(timestamp))
-    idCard = id_card
+    idCard = str(id_card)
     deviceNo = 'kkb-test-001'
     position = '(116.308015,39.819311)'
     ip = '59.110.157.244'
