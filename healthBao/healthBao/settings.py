@@ -26,7 +26,6 @@ import os
 SECRET_KEY = 'qsduyva3$$!w+$@uy0q!1k=!5t1wvnl6&%g3l*gfj49*xi$e0s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,7 +87,6 @@ if DEBUG:
         }
     }
 else:
-
     # 正式版
     print('正在使用正式版配置')
     DATABASES = {
