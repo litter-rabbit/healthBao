@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收录</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.1.3/css/fileinput.min.css">
+    <style>
+        .choose-file {
+            margin: 0 auto;
+        }
+
+        .row {
+            margin: 5rem auto;
+        }
+    </style>
+</head>
+<body>
+<main class="container" style="height: 100vh">
+
+    <div class="row">
+        <div class="choose-file" style="width: 70%">
+            <form action="{% url 'app:include_file'%}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <div class="custom-file">
+                    <input id="file-input" type="file" name="file" required/>
+                    <input class="button btn-primary" type="submit"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">序号</th>
+                <th scope="col">姓名</th>
+                <th scope="col">身份证号</th>
+                <th scope="col">状态</th>
+                <th scope="col">最后一次更新时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in page_obj %}
+            <tr>
+                <th scope="row">{{ forloop.counter}}</th>
+                <td>{{ obj.name }}</td>
+                <td>{{ obj.id_card }}</td>
+                <td>{{ obj.status }}</td>
+                <td>{{ obj.update_time }}</td>
+            </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+        <div class="pagination" style="display: flex;justify-content: center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 第一页</a>
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            页码 {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+        {% endif %}
+    </span>
+        </div>
+</main>
+
+<scripts>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.1.3/js/fileinput.min.js"></script>
+
+    <script>
+        $("#file-input").fileinput({'showUpload':false, 'previewFileType':'jpg'});
+    </script>
+</scripts>
+</body>
+</html>
