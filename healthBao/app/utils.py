@@ -24,7 +24,7 @@ def get_student_status(id_card):
     timestamp = datetime.datetime.now().timestamp()
     timestamp = str(int(timestamp))
     idCard = str(id_card)
-    deviceNo = 'kkb001'
+    deviceNo = 'kkb-test-001'
     position = '(116.308015,39.819311)'
     ip = '59.110.157.244'
     mac ='00:16:3e:2e:15:0e'
