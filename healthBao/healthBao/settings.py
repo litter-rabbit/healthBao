@@ -95,7 +95,7 @@ else:
             #'HOST': 'rm-2ze1z7slz7y970qzbvo.mysql.rds.aliyuncs.com',  # 测试版
             'HOST': 'rm-2ze973b3458vbl5ni9o.mysql.rds.aliyuncs.com',# 正式版
             'PORT': '3306',
-            'NAME': 'kkbsite',
+            'NAME': 'health_bao',
             'USER': 'anyou',
             'PASSWORD': 'Kkb!@#mtg!',
         }
