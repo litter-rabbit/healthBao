@@ -7,7 +7,24 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>健康人数</title>
     <style>
-
+       .detail_num_green{
+           color: green;
+           font-weight: bold;
+           font-size: 5rem;
+           margin-top: 30%;
+       }
+         .detail_num_red{
+           color: red;
+           font-weight: bold;
+           font-size: 5rem;
+           margin-top: 30%;
+       }
+         .detail_num_other{
+           color: teal;
+           font-weight: bold;
+           font-size: 5rem;
+           margin-top: 30%;
+       }
     </style>
 </head>
 
@@ -18,19 +35,19 @@
     <div class="row">
         <div class="col-4">
             <h2 style="color: green">绿码人数</h2>
-            <div class="detail_num">
+            <div class="detail_num_green">
                 {{ g }}
             </div>
         </div>
         <div class="col-4">
             <h2 style="color: red">红码人数</h2>
-              <div class="detail_num">
+              <div class="detail_num_red">
                 {{ r }}
             </div>
         </div>
         <div class="col-4">
             <h2 style="color: #79aec8">待确认人数</h2>
-              <div class="detail_num">
+              <div class="detail_num_other">
                 {{ other }}
             </div>
         </div>

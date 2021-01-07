@@ -27,9 +27,12 @@
                     <input class="button btn-primary" type="submit"/>
                 </div>
             </form>
+
+
         </div>
     </div>
     <div class="row">
+        <button id="update-status" style="margin-bottom: 2rem;border-radius: 1px" class="button btn-danger">点击更新学生状态</button>
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -80,6 +83,12 @@
 
     <script>
         $("#file-input").fileinput({'showUpload':false, 'previewFileType':'jpg'});
+        $("#update-status").on('click',function () {
+
+            window.location.href = '/update_status'
+            console.log('更新location',window.location.href)
+
+        })
     </script>
 </scripts>
 </body>

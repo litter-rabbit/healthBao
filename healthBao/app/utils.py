@@ -65,7 +65,9 @@ def get_student_status(id_card):
         elif color =='2':
             return '红色'
     else:
-        return '身份信息错误'
+        return rsp.get('message')
+
+
 
 
 
