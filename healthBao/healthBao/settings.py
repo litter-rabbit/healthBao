@@ -29,6 +29,11 @@ SECRET_KEY = 'qsduyva3$$!w+$@uy0q!1k=!5t1wvnl6&%g3l*gfj49*xi$e0s'
 
 ALLOWED_HOSTS = ['*']
 
+CRONJOBS = [
+    # 表示每天2：01执行
+    ('01 2 * * *', 'app.core.task')
+]
+
 X_FRAME_OPTIONS = 'ALLOWALL url'
 # Application definition
 AUTH_USER_MODEL = 'app.User'
@@ -40,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'app',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -127,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

@@ -13,6 +13,8 @@ import xlrd
 
 
 def index(request):
+
+
     return render(request, 'app/index.html')
 
 
@@ -69,4 +71,14 @@ def include(request):
 
 
 def detail(request):
-    return render(request, 'app/detail.html')
+
+    green_student_count = Student.objects.filter(status='绿色',user=request.user).count()
+    red_student_count = Student.objects.filter(status='红色',user=request.user).count()
+    all_count = Student.objects.filter(user=request.user).count()
+    other_count = all_count-green_student_count-red_student_count
+    context={}
+    context['g'] = green_student_count
+    context['r'] = red_student_count
+    context['other'] = other_count
+
+    return render(request, 'app/detail.html',context=context)
