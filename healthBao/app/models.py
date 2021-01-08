@@ -21,7 +21,7 @@ class User(AbstractUser):
 class Student(models.Model):
     name = models.CharField(blank=True, null=True, max_length=255)
     status = models.CharField(blank=True, null=True, max_length=255)
-    id_card = models.IntegerField(blank=True, null=True)
+    id_card = models.CharField(max_length=255,null=False)
     update_time = models.DateTimeField("update_time", default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True)
 
