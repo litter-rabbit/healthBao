@@ -38,6 +38,8 @@ X_FRAME_OPTIONS = 'ALLOWALL url'
 # Application definition
 AUTH_USER_MODEL = 'app.User'
 
+STATIC_ROOT = 'static'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
