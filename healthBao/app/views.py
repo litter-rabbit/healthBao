@@ -18,6 +18,7 @@ from .core import task
 import xlrd
 
 
+
 def index(request):
 
 
@@ -57,10 +58,11 @@ def include_file(request):
             status=get_student_status(int(sheet1.row_values(i)[1]))
             if status in ['红色', '绿色', '未在健康宝注册', '黄色']:
                 student = Student.objects.filter(id_card=int(sheet1.row_values(i)[1])).all()
+
                 if student:
-                    student.status=status
-                    student.update_time = timezone.now()
-                    student.save()
+                    student[0].status=status
+                    student[0].update_time = timezone.now()
+                    student[0].save()
                     print('已存在')
                 else:
                     student = Student.objects.create(name=sheet1.row_values(i)[0], id_card=int(sheet1.row_values(i)[1]), user=request.user,status=status)
@@ -117,10 +119,9 @@ def search(request):
 
 @csrf_exempt
 def update_status(request):
-
+    print('更新函数')
     # 更新状态函数
-    t = Thread(target=task,args=(request,))
-    t.start()
+    task(request)
     students = Student.objects.filter(user=request.user).all()
     paginator = Paginator(students, 50)
     pag_objs = paginator.get_page(request.GET.get('page'))
@@ -130,3 +131,44 @@ def update_status(request):
     return render(request, 'app/include.html', context=context)
     pass
 
+
+@csrf_exempt
+def update_one_status(request):
+
+    id =request.GET.get('id')
+    student = Student.objects.filter(id=id).first()
+    status = get_student_status(student.id_card)
+    student.status=status
+    student.save()
+    return render(request, 'app/include.html')
+
+@csrf_exempt
+def update_one_status(request):
+
+    id =request.GET.get('id')
+    student = Student.objects.filter(id=id).first()
+    status = get_student_status(student.id_card)
+    student.status=status
+    student.update_time = timezone.now()
+    student.save()
+    students = Student.objects.filter(user=request.user).all()
+    paginator = Paginator(students, 50)
+    pag_objs = paginator.get_page(request.GET.get('page'))
+    context = {}
+    context['page_obj'] = pag_objs
+    print('page_obj', students)
+    return render(request, 'app/include.html',context=context)
+
+@csrf_exempt
+def delete_one(request):
+
+    id =request.GET.get('id')
+    student = Student.objects.filter(id=id).first()
+    student.delete()
+    students = Student.objects.filter(user=request.user).all()
+    paginator = Paginator(students, 50)
+    pag_objs = paginator.get_page(request.GET.get('page'))
+    context = {}
+    context['page_obj'] = pag_objs
+    print('page_obj', students)
+    return render(request, 'app/include.html',context=context)
